@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; background-color: #24292E; margin: 0; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  width: 62.5rem;
+  margin: 0 auto;
+}
+
+.layout {
+  margin-top: 3.75rem;
+  border: 5px solid linen;
+  border-radius: 10px;
+ }
+
+.sidebar {
+  padding: 25px;
+  background-color: linen;
+  text-align: center;
+}
+
+.main-content {
+  padding: 25px;
+  background-color: linen;
+}
+
+.title {
+  text-align: center;
+  color: tomato;
+}
+
+.list-container {
+  height: 800px;
+}
