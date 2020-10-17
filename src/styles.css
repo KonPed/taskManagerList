@@ -35,4 +35,39 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .cards-holder {
   margin-bottom: 1.5625rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cards-holder:active {
+  transform: scale(0.95);
+}
+
+.card:hover {
+  box-shadow: 0 0 0 5px #eeeeee;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.list-menu {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0 0;
+  list-style: none;
+  padding: 0;
+}
+
+.list-items {
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 5px;
+  color: #24292E;
+}
+
+.list-items:hover {
+  background-color: lightgray;
 }

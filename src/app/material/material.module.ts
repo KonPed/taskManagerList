@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -14,7 +15,8 @@ import {MatCardModule} from '@angular/material/card';
   exports: [
     MatGridListModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ]
 })
 export class MaterialModule {
