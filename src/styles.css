@@ -30,5 +30,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .list-container {
-  height: 800px;
+  min-height: 800px;
+}
+
+.cards-holder {
+  margin-bottom: 1.5625rem;
 }
