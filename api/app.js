@@ -43,6 +43,11 @@ app.delete('/lists/:id', listController.lists_delete_list);
  */
 app.get("/lists/:listId/tasks", taskController.get_all_tasks);
 /**
+ * GET /lists/:listId/tasks
+ * get a specific task by id.
+ */
+app.get("/lists/:listId/tasks/:taskId", taskController.get_single_task);
+/**
  * POST /lists/:listId/tasks
  * create a task in the list specified by id.
  */

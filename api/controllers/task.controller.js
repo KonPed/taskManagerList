@@ -8,6 +8,12 @@ exports.get_all_tasks = ((req, res) => {
   })
 })
 
+exports.get_single_task = ((req, res) => {
+  Task.findOne({_id: req.params.taskId, _listId: req.params.listId}).then((foundTask) => {
+    res.send(foundTask);
+  }).catch((error) => console.log(error));
+})
+
 exports.tasks_create_task = ((req, res) => {
   let title = req.body.title;
   let newTask = new Task({
