@@ -1,1 +1,0 @@
-/* This file will handle connection to MongoDb database. */
