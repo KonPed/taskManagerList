@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
+const mongoose = require("../api/mongoose");
+const BodyParser = require("body-parser");
 
 /* Load models */
-const list = require('./models/list.model');
-const task = require('./models/task.model');
+const List = require('./models/list.model');
+const Task = require('./models/task.model');
 
+app.use(BodyParser.json());
 
 /******* Route Handlers ********/
 /**
