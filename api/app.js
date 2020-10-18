@@ -15,7 +15,7 @@ app.use(BodyParser.json());
  * Get all Lists
  */
 app.get('/lists', ((req, res) => {
-  list.find({}).then((lists) => {
+  List.find({}).then((lists) => {
     res.send(lists);
   });
 }))
@@ -24,7 +24,20 @@ app.get('/lists', ((req, res) => {
  * Create a list
  */
 app.post('/lists', ((req, res) => {
-
+  let listTitle = req.body.title;
+  const list = new List({
+    title: listTitle
+  });
+  list.save().then((result) => {
+    if (result) {
+      console.log("list Inserted successfully");
+      res.send(result);
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+      res.send(error);
+    });
 }))
 /**
  * PATCH /lists:id
