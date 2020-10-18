@@ -51,12 +51,13 @@ app.post("/lists/:listId/tasks", taskController.tasks_create_task);
  * PATCH /lists/:listId/tasks/:taskId
  * Update am existing Task
  */
-app.delete("/lists/:listId/tasks/:taskId", taskController.tasks_delete_task);
+app.patch("/lists/:listId/tasks/:taskId", taskController.tasks_update_task);
 /**
- * DELETE /lists:id
- * Delete am existing list
+ * DELETE /lists/:listId/tasks/:taskId
+ * Delete am existing task
  */
-app.delete('/lists/:id', listController.lists_delete_list);
+app.delete('/lists/:listId/tasks/:taskId', taskController.tasks_delete_task);
+
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 })
