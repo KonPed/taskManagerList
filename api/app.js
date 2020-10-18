@@ -1,13 +1,20 @@
 const express = require('express');
 const app = express();
 
+/* Load models */
+const list = require('./models/list.model');
+const task = require('./models/task.model');
+
+
 /******* Route Handlers ********/
 /**
  * GET /lists
  * Get all Lists
  */
 app.get('/lists', ((req, res) => {
-
+  list.find({}).then((lists) => {
+    res.send(lists);
+  });
 }))
 /**
  * POST /lists

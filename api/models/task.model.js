@@ -1,4 +1,4 @@
-const mongoose = require(mongoose);
+const mongoose = require("mongoose");
 
 const {Schema} = mongoose;
 
@@ -10,8 +10,10 @@ const taskSchema = new Schema({
     trim: true
   },
   _listId: {
+    type: mongoose.Types.ObjectId,
     required: true
   }
 });
 
-const task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model('Task', taskSchema);
+module.exports = Task;
