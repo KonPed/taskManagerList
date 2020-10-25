@@ -1,0 +1,17 @@
+.form-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50rem;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  min-height: 250px;
+  text-align: center;
+  background-color: linen;
+}

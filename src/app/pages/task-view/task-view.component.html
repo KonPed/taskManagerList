@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="layout">
+    <mat-drawer-container class="list-container">
+      <mat-drawer class="sidebar" mode="side" opened>
+        <div class="title">
+          <h2>Lists</h2>
+        </div>
+        <ul class="list-menu" *ngFor="let list of lists">
+          <li class="list-items">{{list.title}}</li>
+        </ul>
+        <button routerLink="/new-list" class="callbtn" mat-stroked-button>Add a list</button>
+      </mat-drawer>
+      <mat-drawer-content class="main-content">
+        <div class="title">
+          <h2>Tasks</h2>
+        </div>
+        <!-- Cards for tasks would be placed -->
+        <div *ngFor="let card of cards; let i = index" class="cards-holder">
+          <div #tmpCards>
+            <mat-card (click)="onClick(i)" class="card">{{card.title}}</mat-card>
+          </div>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </div>
+</div>

@@ -19,17 +19,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cards = this.fakeService.getCards();
-    this.listService.getAllLists().subscribe((lists: List[]) => {
-      this.lists = lists;
-    });
-  }
-
-  onClick(index: number) {
-    if (this.elementCards.toArray()[index].nativeElement.classList.contains('complete')) {
-      this.elementCards.toArray()[index].nativeElement.classList.remove('complete');
-    } else {
-      this.elementCards.toArray()[index].nativeElement.classList.add('complete');
-    }
   }
 }
