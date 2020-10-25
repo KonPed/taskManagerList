@@ -9,7 +9,7 @@ export class WebService {
   readonly ROOT_URL;
 
   constructor(private httpClient: HttpClient) {
-    this.ROOT_URL = 'http://localhost:3000';
+
   }
 
   // public createList(list: List) {
@@ -25,7 +25,7 @@ export class WebService {
   }
 
   public post(uri: string, payload: List) {
-    return this.httpClient.post(`${this.ROOT_URL}/${uri}`, payload);
+    return this.httpClient.post(`${uri}`, payload);
   }
 
   public patch(uri: string, payload: object) {

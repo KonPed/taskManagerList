@@ -1,16 +1,21 @@
 <div class="form-card-container">
-  <div class="form-card">
-    <h3>Add a new list</h3>
-    <p>Insert list name</p>
-    <div class="form-field-input">
-      <mat-form-field appearance="fill">
-        <mat-label>List Name</mat-label>
-        <input matInput>
-      </mat-form-field>
+  <form #listForm="ngForm" (ngSubmit)="onSubmit(listForm)" novalidate>
+    <div class="form-card">
+      <h3>Add a new list</h3>
+      <p>Insert list name</p>
+      <div class="form-field-input">
+        <mat-form-field appearance="fill">
+          <mat-label>List Name</mat-label>
+          <input matInput name="listTitle" ngModel>
+        </mat-form-field>
+      </div>
+      <div>
+        <button routerLink="/" mat-raised-button>Cancel</button>
+        <button mat-raised-button color="primary">Submit</button>
+      </div>
     </div>
-    <div>
-      <button routerLink="/" mat-raised-button>Cancel</button>
-      <button mat-raised-button color="primary">Submit</button>
-    </div>
-  </div>
+  </form>
+  <pre>
+    {{listForm.value | json}}
+</pre>
 </div>

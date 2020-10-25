@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { NewListComponent } from './pages/new-list/new-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {TaskViewComponent} from './pages/task-view/task-view.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {TaskViewComponent} from './pages/task-view/task-view.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

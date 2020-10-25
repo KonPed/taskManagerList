@@ -13,4 +13,8 @@ export class ListService {
     /* send a Web request ti create a list. */
     return this.webService.get('/api/lists');
   }
+
+  createList(list: List) {
+    return this.webService.post('/api/lists', list);
+  }
 }
