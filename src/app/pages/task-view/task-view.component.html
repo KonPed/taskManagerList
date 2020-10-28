@@ -6,7 +6,7 @@
           <h2>Lists</h2>
         </div>
         <ul class="list-menu" *ngFor="let list of lists">
-          <li [routerLink]="['/lists', list._id]" class="list-items">{{list.title}}</li>
+          <li routerLinkActive="link-active" [routerLink]="['/lists', list._id]" class="list-items">{{list.title}}</li>
         </ul>
         <button routerLink="/new-list" class="callbtn" mat-stroked-button>Add a list</button>
       </mat-drawer>
