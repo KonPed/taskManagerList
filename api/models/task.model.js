@@ -9,7 +9,7 @@ const taskSchema = new Schema({
     minLength: 1,
     trim: true
   },
-  _listId: {
+  listId: {
     type: mongoose.Types.ObjectId,
     required: true
   }

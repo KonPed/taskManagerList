@@ -1,7 +1,7 @@
 const Task = require('../models/task.model');
 
 exports.get_all_tasks = ((req, res) => {
-  Task.find({_listId: req.params.listId}).then((tasks) => {
+  Task.find({listId: req.params.listId}).then((tasks) => {
     res.send(tasks);
   }).catch((error) => {
     console.log(error);
@@ -9,7 +9,7 @@ exports.get_all_tasks = ((req, res) => {
 })
 
 exports.get_single_task = ((req, res) => {
-  Task.findOne({_id: req.params.taskId, _listId: req.params.listId}).then((foundTask) => {
+  Task.findOne({_id: req.params.taskId, listId: req.params.listId}).then((foundTask) => {
     res.send(foundTask);
   }).catch((error) => console.log(error));
 })
@@ -18,7 +18,7 @@ exports.tasks_create_task = ((req, res) => {
   let title = req.body.title;
   let newTask = new Task({
     title: title,
-    _listId: req.params.listId
+    listId: req.params.listId
   })
   newTask.save().then((result) => {
     if (result) {

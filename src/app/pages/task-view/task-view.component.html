@@ -6,7 +6,7 @@
           <h2>Lists</h2>
         </div>
         <ul class="list-menu" *ngFor="let list of lists">
-          <li class="list-items">{{list.title}}</li>
+          <li [routerLink]="['/lists', list._id]" class="list-items">{{list.title}}</li>
         </ul>
         <button routerLink="/new-list" class="callbtn" mat-stroked-button>Add a list</button>
       </mat-drawer>
@@ -15,9 +15,9 @@
           <h2>Tasks</h2>
         </div>
         <!-- Cards for tasks would be placed -->
-        <div *ngFor="let card of cards; let i = index" class="cards-holder">
+        <div *ngFor="let task of tasks; let i = index" class="cards-holder">
           <div #tmpCards>
-            <mat-card (click)="onClick(i)" class="card">{{card.title}}</mat-card>
+            <mat-card (click)="onClick(i)" class="card">{{task.title}}</mat-card>
           </div>
         </div>
       </mat-drawer-content>
