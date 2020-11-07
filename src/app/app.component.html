@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <span>Task Manager</span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="sidebar" mode="side">
+    <h2>Lists</h2>
+    <ul class="list-menu" *ngFor="let list of lists">
+      <li routerLinkActive="" [routerLink]="['/lists', list._id]" class="list-items">{{list.title}}</li>
+    </ul>
+    <button routerLink="/new-list" class="callbtn" mat-stroked-button>Add a list</button>
+  </mat-drawer>
+  <mat-drawer-content class="main-content">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -21,7 +21,7 @@ export class TaskViewComponent implements OnInit {
   constructor(private fakeService: FakeBackEndService, private listService: ListService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.cards = this.fakeService.getCards();
+    this.cards = this.fakeService.getCards();
     this.listService.getAllLists().subscribe((lists: List[]) => {
       this.lists = lists;
     });
@@ -31,7 +31,7 @@ export class TaskViewComponent implements OnInit {
       });
     });
   }
-
+  /* Apply crossing style when a task consider complete. */
   onClick(index: number) {
     if (this.elementCards.toArray()[index].nativeElement.classList.contains('complete')) {
       this.elementCards.toArray()[index].nativeElement.classList.remove('complete');

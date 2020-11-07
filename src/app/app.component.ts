@@ -14,10 +14,14 @@ export class AppComponent implements OnInit {
   cards: Card[];
   lists: List[];
   @ViewChildren('tmpCards') elementCards: QueryList<ElementRef>;
+  showFiller = false;
 
   constructor(private fakeService: FakeBackEndService, private listService: ListService) {
   }
 
   ngOnInit() {
+    this.listService.getAllLists().subscribe((lists: List[]) => {
+      this.lists = lists;
+    });
   }
 }

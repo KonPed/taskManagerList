@@ -2,21 +2,28 @@
 html, body { height: 100%; background-color: #24292E; margin: 0; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.container {
-  width: 62.5rem;
-  margin: 0 auto;
+.example-container {
+  height: calc(100vh - 64px);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.layout {
-  margin-top: 3.75rem;
-  border: 5px solid linen;
-  border-radius: 10px;
- }
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: start;
+  justify-content: start;
+}
+
+.screen_padding {
+  padding: 20px;
+}
+.container {
+  width: 62.5rem;
+}
 
 .sidebar {
   padding: 25px;
   background-color: linen;
-  text-align: center;
 }
 
 .main-content {
@@ -52,18 +59,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .list-menu {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0 0;
+  margin: 0;
   list-style: none;
   padding: 0;
 }
 
 .list-items {
-  padding: 10px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0;
+  margin-bottom: 15px;
   border-radius: 5px 5px;
   color: #24292E;
 }
