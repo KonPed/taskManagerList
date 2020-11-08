@@ -1,0 +1,20 @@
+<div class="form-card-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+    <div class="form-card">
+      <h3>Login</h3>
+      <div>
+        <mat-form-field class="form-field">
+          <mat-label>Add a task</mat-label>
+          <textarea rows="5" matInput name="task" ngModel></textarea>
+        </mat-form-field>
+      </div>
+      <div class="button-wrapper">
+        <button class="cancel-btn" routerLink="/" mat-raised-button>Cancel</button>
+        <button class="submit-btn" mat-raised-button color="primary">Submit</button>
+      </div>
+    </div>
+  </form>
+  <pre>
+    {{loginForm.value | json}}
+</pre>
+</div>

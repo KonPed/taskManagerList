@@ -1,0 +1,35 @@
+.form-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50rem;
+}
+
+.form-card {
+  padding: 35px;
+  width: 500px;
+  background-color: wheat;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px 0px #24292E;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.submit-btn {
+  background-color: #fefbd8;
+  color: black;
+}
+
+.cancel-btn {
+  background-color: #36486b;
+  color: whitesmoke;
+}

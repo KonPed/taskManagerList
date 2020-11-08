@@ -10,13 +10,15 @@ import {AppRoutingModule} from './app-routing.module';
 import {TaskViewComponent} from './pages/task-view/task-view.component';
 import {FormsModule} from '@angular/forms';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewListComponent,
     TaskViewComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
