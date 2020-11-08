@@ -14,20 +14,20 @@ exports.get_single_task = ((req, res) => {
   }).catch((error) => console.log(error));
 })
 
-exports.tasks_create_task = ((req, res) => {
-  let title = req.body.title;
-  let newTask = new Task({
+exports.tasks_create_task = (async (req, res) => {
+  const title = req.body.title;
+  const listId = req.params.listId;
+  const newTask = new Task({
     title: title,
-    listId: req.params.listId
+    listId: listId
   })
-  newTask.save().then((result) => {
-    if (result) {
-      console.log("Task inserted successfully");
-      res.send(result);
-    }
-  }).catch((error) => {
+  try {
+    const result = await newTask.save();
+    console.log("Task inserted successfully");
+    res.json(result);
+  }catch (error) {
     res.send(error);
-  });
+  }
 })
 
 exports.tasks_update_task = ((req, res) => {

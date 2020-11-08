@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {WebService} from './web.service';
 import {List} from '../models/list';
+import {Task} from '../models/task';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,5 +20,9 @@ export class ListService {
 
   getTasks(listId: string) {
     return this.webService.get(`/api/lists/${listId}/tasks`);
+  }
+
+  createTask(task: Task) {
+    return this.webService.post(`/api/lists/${task.listId}/tasks`, task);
   }
 }

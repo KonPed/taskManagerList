@@ -1,9 +1,13 @@
 const List = require('../models/list.model');
 
-exports.lists_get_all = ((req, res) => {
-  List.find({}).then((lists) => {
-    res.send(lists);
-  });
+/* Use async - await as a best practice. */
+exports.lists_get_all = (async (req, res) => {
+  try {
+    const lists = await List.find({});
+    res.json(lists);
+  }catch (error) {
+    res.send(error);
+  }
 })
 
 exports.lists_create_list = ((req, res) => {

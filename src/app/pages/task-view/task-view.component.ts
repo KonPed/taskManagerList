@@ -16,15 +16,18 @@ export class TaskViewComponent implements OnInit {
   cards: Card[];
   lists: List[];
   tasks: Task[];
+  listId: string;
   @ViewChildren('tmpCards') elementCards: QueryList<ElementRef>;
 
   constructor(private fakeService: FakeBackEndService, private listService: ListService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.cards = this.fakeService.getCards();
+    // this.cards = this.fakeService.getCards();
     this.route.params.subscribe((params: Params) => {
-      this.listService.getTasks(params.id).subscribe((tasks: any[]) => {
+      this.listId = params.listId;
+      this.listService.getTasks(this.listId).subscribe((tasks: any[]) => {
         this.tasks = tasks;
+        console.log(tasks);
       });
     });
   }

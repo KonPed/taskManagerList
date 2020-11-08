@@ -1,13 +1,13 @@
 <div>
   <h2>Tasks</h2>
   <!-- Cards for tasks would be placed -->
-  <div *ngFor="let task of cards; let i = index" class="cards-holder">
+  <div *ngFor="let task of tasks; let i = index" class="cards-holder">
     <div #tmpCards>
       <mat-card (click)="onClick(i)" class="card">{{task.title}}</mat-card>
     </div>
   </div>
   <div class="fab">
-    <button class="addTask-btn" routerLink="/new-task" mat-fab color="primary" aria-label="Add task button">
+    <button class="addTask-btn" [routerLink]="['/lists', listId, 'new-task']" mat-fab color="primary" aria-label="Add task button">
       <mat-icon>add</mat-icon>
     </button>
   </div>
