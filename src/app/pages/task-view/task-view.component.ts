@@ -22,9 +22,6 @@ export class TaskViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.cards = this.fakeService.getCards();
-    this.listService.getAllLists().subscribe((lists: List[]) => {
-      this.lists = lists;
-    });
     this.route.params.subscribe((params: Params) => {
       this.listService.getTasks(params.id).subscribe((tasks: any[]) => {
         this.tasks = tasks;
