@@ -32,12 +32,18 @@ export class TaskViewComponent implements OnInit {
     });
   }
   /* Apply crossing style when a task consider complete. */
-  onClick(index: number) {
-    if (this.elementCards.toArray()[index].nativeElement.classList.contains('complete')) {
-      this.elementCards.toArray()[index].nativeElement.classList.remove('complete');
-    } else {
-      this.elementCards.toArray()[index].nativeElement.classList.add('complete');
-    }
+  onClick(task: Task, index: number) {
+    this.listService.completedTask(this.setTaskAsCompleted(task)).subscribe(res => console.log(res));
+    // if (this.elementCards.toArray()[index].nativeElement.classList.contains('complete')) {
+    //   this.elementCards.toArray()[index].nativeElement.classList.remove('complete');
+    // } else {
+    //   this.elementCards.toArray()[index].nativeElement.classList.add('complete');
+    // }
+  }
+
+  setTaskAsCompleted(task: Task): Task {
+    task.completed = true;
+    return task;
   }
 
 }

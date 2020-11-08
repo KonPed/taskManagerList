@@ -25,4 +25,8 @@ export class ListService {
   createTask(task: Task) {
     return this.webService.post(`/api/lists/${task.listId}/tasks`, task);
   }
+
+  completedTask(task: Task) {
+    return this.webService.patch(`/api/lists/${task.listId}/tasks/${task._id}`, task);
+  }
 }

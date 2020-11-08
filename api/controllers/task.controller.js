@@ -25,17 +25,20 @@ exports.tasks_create_task = (async (req, res) => {
     const result = await newTask.save();
     console.log("Task inserted successfully");
     res.json(result);
-  }catch (error) {
+  } catch (error) {
     res.send(error);
   }
 })
 
-exports.tasks_update_task = ((req, res) => {
-  Task.findOneAndUpdate({_id: req.params.taskId}, {
-    $set: req.body
-  }).then(() => {
-    res.sendStatus(200);
-  }).catch((error) => console.log(error));
+exports.tasks_update_task = (async (req, res) => {
+  const taskId = req.params.taskId;
+  try {
+    const result = await Task.findOneAndUpdate({_id: taskId}, {
+      $set: req.body
+    });
+  } catch (error) {
+    res.send(error);
+  }
 })
 
 exports.tasks_delete_task = ((req, res) => {

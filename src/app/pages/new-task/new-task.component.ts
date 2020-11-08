@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Task} from '../../models/task';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ListService} from '../../services/list.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {ListService} from '../../services/list.service';
 export class NewTaskComponent implements OnInit {
   listId: string;
 
-  constructor(private route: ActivatedRoute, private apiService: ListService) { }
+  constructor(private route: ActivatedRoute, private apiService: ListService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -29,8 +29,8 @@ export class NewTaskComponent implements OnInit {
   }
 
   saveTask(task: Task) {
-    this.apiService.createTask(task).subscribe((task: Task) => {
-      // this.router.navigate(['/']);
+    this.apiService.createTask(task).subscribe(() => {
+      this.router.navigate(['../'], {relativeTo: this.route});
     });
   }
 
