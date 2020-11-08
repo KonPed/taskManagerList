@@ -9,12 +9,14 @@ import { NewListComponent } from './pages/new-list/new-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {TaskViewComponent} from './pages/task-view/task-view.component';
 import {FormsModule} from '@angular/forms';
+import { NewTaskComponent } from './pages/new-task/new-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewListComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    NewTaskComponent
   ],
   imports: [
     BrowserModule,
