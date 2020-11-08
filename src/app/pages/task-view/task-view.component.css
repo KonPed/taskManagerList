@@ -7,3 +7,8 @@
   flex-direction: column;
   align-items: flex-end;
 }
+
+.addTask-btn {
+  background-color: #fefbd8;
+  color: black;
+}
