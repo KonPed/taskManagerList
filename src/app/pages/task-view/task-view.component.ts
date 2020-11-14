@@ -42,7 +42,7 @@ export class TaskViewComponent implements OnInit {
   }
 
   setTaskAsCompleted(task: Task): Task {
-    task.completed = true;
+    task.completed = !task.completed;
     return task;
   }
 

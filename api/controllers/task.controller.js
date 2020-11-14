@@ -36,6 +36,7 @@ exports.tasks_update_task = (async (req, res) => {
     const result = await Task.findOneAndUpdate({_id: taskId}, {
       $set: req.body
     });
+    res.send(result);
   } catch (error) {
     res.send(error);
   }
