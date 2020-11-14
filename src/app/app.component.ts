@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FakeBackEndService} from './fake-back-end.service';
 import {Card} from './models/card';
 import {ListService} from './services/list.service';

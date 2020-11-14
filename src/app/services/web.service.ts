@@ -29,7 +29,7 @@ export class WebService {
   }
 
   public patch(uri: string, payload: object) {
-    return this.httpClient.patch(`${this.ROOT_URL}/${uri}`, payload);
+    return this.httpClient.patch(`${uri}`, payload);
   }
 
   public delete(uri: string) {
