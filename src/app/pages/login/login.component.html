@@ -3,9 +3,16 @@
     <div class="form-card">
       <h3>Login</h3>
       <div>
-        <mat-form-field class="form-field">
-          <mat-label>Add a task</mat-label>
-          <textarea rows="5" matInput name="task" ngModel></textarea>
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput name="usename">
+        </mat-form-field>
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" name="password">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
       </div>
       <div class="button-wrapper">

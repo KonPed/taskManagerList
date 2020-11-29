@@ -13,7 +13,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minLength: 1,
     trim: true,
-    unique: true,
   },
   password: {
     type: String,
@@ -46,7 +45,7 @@ UserSchema.statics.findByIdAndToken = async function(id, token) {
 
 UserSchema.statics.findByCredentials = async function(email, password) {
   const user = this;
-  const foundUserByCredentials = await user.findOne({email: user.email});
+  const foundUserByCredentials = await user.findOne({email: email});
   if (!foundUserByCredentials) {
     return Promise.reject();
   } else {
@@ -65,30 +64,30 @@ UserSchema.statics.findByCredentials = async function(email, password) {
 UserSchema.statics.hasRefreshTokenExpired = async function(expiresAt) {
   const user = this;
   let secondsSinceEpoch = Date.now() / 1000;
-  return expiresAt <= secondsSinceEpoch;
+  return expiresAt > secondsSinceEpoch;
 }
 
-/* Middleware */
-UserSchema.pre('save', function() {
+/* Middleware for hashing the user password to database. */
+UserSchema.pre('save', function(next) {
   const user = this;
   const saltRounds = 10;
   if (user.isModified('password')) {
     bcrypt.hash(user.password, saltRounds, function (error, hash) {
       user.password = hash;
-      console.log(hash);
+      next();
     });
   }
 });
 
 /* Instance methods */
-UserSchema.methods.toJSON = function () {
-  const user = this;
-  const userObj = user.toObject();
-  console.log(user);
-  // delete userObj.password;
-  // delete userObj.sessions;
-  console.log(userObj);
-};
+// UserSchema.methods.toJSON = function () {
+//   const user = this;
+//   const userObj = user.toObject();
+//   console.log(user);
+//   // delete userObj.password;
+//   // delete userObj.sessions;
+//   console.log(userObj);
+// };
 
 UserSchema.method('genereteAccessAuthToken', function() {
   console.log('Generating Token');
@@ -111,35 +110,42 @@ UserSchema.method('generateRefreshAuthToken', function () {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(64, (err, buf) => {
       if (!err) {
-        let token = buf.toString('hex');
-        console.log('RefreshToken =>', token);
-        return resolve(token)
+        let refreshToken = buf.toString('hex');
+        console.log('RefreshToken =>', refreshToken);
+        return resolve(refreshToken)
       } else {
-
+        return reject();
       }
     })
   });
 });
 
-UserSchema.method('createSession', function (user) {
-  return user.generateRefreshAuthToken().then((refreshToken) => {
-    return sessionSaveToDb(user, refreshToken);
-  }).then((refreshToken) => {
-
+UserSchema.method('createSession', function () {
+  let user = this;
+  console.log(user);
+  return new Promise((resolve, reject) => {
+    user.generateRefreshAuthToken().then((refreshToken) => {
+      return sessionSaveToDb(user, refreshToken);
+    }).then((refreshToken) => {
+      return resolve(refreshToken);
+    }).catch((error) => {
+      return reject(error);
+    });
   });
 });
 
-let sessionSaveToDb = (user, refreshToken) => {
+let sessionSaveToDb =  (user, refreshToken) => {
+  console.log("the refresh token", refreshToken);
   return new Promise((resolve, reject) => {
     let expiresAt = generateRefreshTokenExpiryTime();
-    console.log(expiresAt);
     user.sessions.push({token: refreshToken, expiredAt: expiresAt});
-    user.save().then(() => {
+    console.log('143', user);
+    try {
+      user.save();
       return resolve(refreshToken);
-    }).catch(error => {
-      reject(error);
-    });
-    console.log(user);
+    } catch (error) {
+      reject(error)
+    }
   });
 }
 

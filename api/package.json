@@ -4,11 +4,13 @@
   "description": "backend service for TaskManagerList",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Konstantinos Paidarakis",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
     "nodemon": "^2.0.6"

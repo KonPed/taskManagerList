@@ -23,10 +23,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.listSubscription = this.listService.getAllLists().subscribe((lists: List[]) => {
-      console.log(lists);
-      this.lists = lists;
-    });
+    // this.listSubscription = this.listService.getAllLists().subscribe((lists: List[]) => {
+    //   console.log(lists);
+    //   this.lists = lists;
+    // });
     this.router.events.subscribe((routerEvent: RouterEvent) => {
       if (routerEvent instanceof NavigationEnd && routerEvent.url === '/') {
         this.listSubscription = this.listService.getAllLists().subscribe((lists: List[]) => {
