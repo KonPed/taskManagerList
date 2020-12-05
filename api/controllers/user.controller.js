@@ -1,3 +1,4 @@
+const { error } = require('protractor');
 const User = require('../models/user.model');
 
 exports.signUp = (async (req, res, next) => {
@@ -9,17 +10,24 @@ exports.signUp = (async (req, res, next) => {
     password: body.password,
     sessions: body.sessions
   });
-  // console.log(newUser);
   try {
-    // const savedUser = await newUser.save();
-    // console.log('savedUser', savedUser);
-    console.log('newUser', newUser);
-    const refreshToken = await newUser.createSession();
-    // console.log(refreshToken);
-    // console.log('refreshToken from saved User', refreshToken);
-    // console.log(savedUser);
-    res.json(newUser);
-  } catch (error) {
-    return next(error);
+    newUser.save().then(() => {
+      return newUser.createSession().then((refreshToken) => {
+        return newUser.genereteAccessAuthToken().then((accessToken) => {
+          console.log("this is the accessToken", accessToken);
+          return {refreshToken, accessToken};
+        });
+      }).then((authtokens) => {
+        console.log('AuthTokens =>', authtokens);
+        res.header("x-refresh-token", authtokens.refreshToken)
+        .header("x-access-token", authtokens.accessToken)
+        .send(newUser);
+      }).catch((error) => {
+        console.log("Error generating tokens => ", error);
+        res.status(400).send(error);
+      });
+    });
+  } catch (conError) {
+    console.log('Connection problem', conError);
   }
 });

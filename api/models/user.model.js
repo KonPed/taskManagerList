@@ -76,29 +76,20 @@ UserSchema.pre('save', function(next) {
       user.password = hash;
       next();
     });
+  } else {
+    next();
   }
 });
 
-/* Instance methods */
-// UserSchema.methods.toJSON = function () {
-//   const user = this;
-//   const userObj = user.toObject();
-//   console.log(user);
-//   // delete userObj.password;
-//   // delete userObj.sessions;
-//   console.log(userObj);
-// };
-
 UserSchema.method('genereteAccessAuthToken', function() {
-  console.log('Generating Token');
+  console.log('Generating Access Token......');
   const user = this;
   return new Promise((resolve, reject) => {
     /* Create the JWT and return. */
-    jwt.sign({id: user._id.toHexString()}, jwtSecret, {expiresIn: '15m'}, (err, token) => {
+    jwt.sign({id: user._id.toHexString()}, jwtSecret, {expiresIn: '15m'}, (err, accessToken) => {
       if (!err) {
-        console.log('AccessToken =>', token);
-        sessionSaveToDb(user);
-        resolve(token);
+        console.log('AccessToken =>', accessToken);
+        resolve(accessToken);
       } else {
         reject();
       }
@@ -122,7 +113,6 @@ UserSchema.method('generateRefreshAuthToken', function () {
 
 UserSchema.method('createSession', function () {
   let user = this;
-  console.log(user);
   return new Promise((resolve, reject) => {
     user.generateRefreshAuthToken().then((refreshToken) => {
       return sessionSaveToDb(user, refreshToken);
