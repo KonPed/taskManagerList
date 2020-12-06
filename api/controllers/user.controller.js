@@ -1,6 +1,7 @@
 const { error } = require('protractor');
 const User = require('../models/user.model');
 
+/* Signup method.*/
 exports.signUp = (async (req, res, next) => {
   console.log(req);
   let body = req.body;
@@ -11,10 +12,9 @@ exports.signUp = (async (req, res, next) => {
     sessions: body.sessions
   });
   try {
-    newUser.save().then(() => {
+    await newUser.save().then(() => {
       return newUser.createSession().then((refreshToken) => {
         return newUser.genereteAccessAuthToken().then((accessToken) => {
-          console.log("this is the accessToken", accessToken);
           return {refreshToken, accessToken};
         });
       }).then((authtokens) => {
@@ -24,10 +24,31 @@ exports.signUp = (async (req, res, next) => {
         .send(newUser);
       }).catch((error) => {
         console.log("Error generating tokens => ", error);
-        res.status(400).send(error);
+        res.sendStatus(400);
       });
     });
   } catch (conError) {
     console.log('Connection problem', conError);
   }
 });
+
+/* Login method */
+exports.login = (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  User.findByCredentials(email, password).then((user) => {
+    user.createSession().then((refreshToken) => {
+      return user.genereteAccessAuthToken().then((accessToken) => {
+        return {refreshToken, accessToken};
+      });
+    }).then((authtokens) => {
+      console.log('AuthTokens =>', authtokens);
+      res.header("x-refresh-token", authtokens.refreshToken)
+        .header("x-access-token", authtokens.accessToken)
+        .send(user);
+    });
+  }).catch((error) => {
+    console.log("Error => User Not found. ", error);
+    res.sendStatus(400);
+  });
+}

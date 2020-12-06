@@ -43,22 +43,41 @@ UserSchema.statics.findByIdAndToken = async function(id, token) {
   return foundUser;
 }
 
-UserSchema.statics.findByCredentials = async function(email, password) {
+UserSchema.statics.findByCredentials = function(email, password) {
   const user = this;
-  const foundUserByCredentials = await user.findOne({email: email});
-  if (!foundUserByCredentials) {
-    return Promise.reject();
-  } else {
-    return new Promise((resolve, reject) => {
-      bcrypt.compare(password, user.password, function (err, result) {
-        if (result) {
-          resolve(user);
-        } else {
-          reject();
-        }
-      });
-    });
-  }
+  console.log('User => ', user);
+  return user.findOne({email}).then((user) => {
+    console.log("foundUserByCredentials => ", user);
+    if (!user) {
+      return Promise.reject();
+    } else {
+      return new Promise((resolve, reject) => {
+        bcrypt.compare(password, user.password, function(err, result) {
+          console.log(result);
+          console.log(err);
+          if (result) {
+            resolve(user);
+          } else {
+            reject();
+          }
+        })
+      }).catch((error) => console.log("error", error));
+    }
+  });
+  // if (!foundUserByCredentials) {
+  //   console.log('User not found');
+  //   return Promise.reject();
+  // } else {
+  //   return new Promise((resolve, reject) => {
+  //     bcrypt.compare(password, user.password, function (err, result) {
+  //       if (result) {
+  //         resolve(user);
+  //       } else {
+  //         reject();
+  //       }
+  //     });
+  //   });
+  // }
 }
 
 UserSchema.statics.hasRefreshTokenExpired = async function(expiresAt) {
