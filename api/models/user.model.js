@@ -32,11 +32,11 @@ const UserSchema = new mongoose.Schema({
 });
 
 /* Model methods */
-UserSchema.statics.findByIdAndToken = async function(id, token) {
+UserSchema.statics.findByIdAndToken = function(id, token) {
   let foundUser;
   const user = this;
   try {
-    foundUser = await user.findOne({_id: id, "sessions.token": token});
+    foundUser = user.findOne({_id: id, "sessions.token": token});
   } catch (error) {
 
   }
@@ -80,10 +80,9 @@ UserSchema.statics.findByCredentials = function(email, password) {
   // }
 }
 
-UserSchema.statics.hasRefreshTokenExpired = async function(expiresAt) {
-  const user = this;
+UserSchema.statics.hasRefreshTokenExpired = function(expiresAt) {
   let secondsSinceEpoch = Date.now() / 1000;
-  return expiresAt > secondsSinceEpoch;
+  return expiresAt <= secondsSinceEpoch;
 }
 
 /* Middleware for hashing the user password to database. */

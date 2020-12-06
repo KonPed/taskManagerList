@@ -52,3 +52,13 @@ exports.login = (req, res) => {
     res.sendStatus(400);
   });
 }
+
+/* Root method */
+exports.accessToken = (req, res) => {
+  console.log(req);
+  req.userObject.genereteAccessAuthToken().then((accessToken) => {
+    res.header("x-access-token", accessToken).send(accessToken);
+  }).catch((error) => {
+    res.status(400).send(error);
+  });
+};
