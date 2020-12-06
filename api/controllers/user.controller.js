@@ -12,23 +12,16 @@ exports.signUp = (async (req, res, next) => {
     sessions: body.sessions
   });
   try {
-    await newUser.save().then(() => {
-      return newUser.createSession().then((refreshToken) => {
-        return newUser.genereteAccessAuthToken().then((accessToken) => {
-          return {refreshToken, accessToken};
-        });
-      }).then((authtokens) => {
-        console.log('AuthTokens =>', authtokens);
-        res.header("x-refresh-token", authtokens.refreshToken)
-        .header("x-access-token", authtokens.accessToken)
-        .send(newUser);
-      }).catch((error) => {
-        console.log("Error generating tokens => ", error);
-        res.sendStatus(400);
-      });
-    });
+    await newUser.save();
+    const refreshToken = await newUser.createSession();
+    const accessToken = await newUser.genereteAccessAuthToken();
+    console.log('AuthTokens =>', {refreshToken, accessToken});
+    res.header("x-refresh-token", refreshToken)
+      .header("x-access-token", accessToken)
+      .send(newUser);
   } catch (conError) {
-    console.log('Connection problem', conError);
+    console.log("Error generating tokens => ", error);
+    res.sendStatus(400);
   }
 });
 

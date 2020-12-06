@@ -129,17 +129,24 @@ UserSchema.method('generateRefreshAuthToken', function () {
   });
 });
 
-UserSchema.method('createSession', function () {
+UserSchema.method('createSession', async function () {
   let user = this;
-  return new Promise((resolve, reject) => {
-    user.generateRefreshAuthToken().then((refreshToken) => {
-      return sessionSaveToDb(user, refreshToken);
-    }).then((refreshToken) => {
-      return resolve(refreshToken);
-    }).catch((error) => {
-      return reject(error);
-    });
-  });
+  try {
+    const refreshToken = await user.generateRefreshAuthToken();
+    return await sessionSaveToDb(user, refreshToken);
+  } catch (e) {
+    console.log(e);
+  }
+
+  // return new Promise((resolve, reject) => {
+  //   user.generateRefreshAuthToken().then((refreshToken) => {
+  //     return sessionSaveToDb(user, refreshToken);
+  //   }).then((refreshToken) => {
+  //     return resolve(refreshToken);
+  //   }).catch((error) => {
+  //     return reject(error);
+  //   });
+  // });
 });
 
 let sessionSaveToDb =  (user, refreshToken) => {
